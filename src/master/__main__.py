@@ -1,6 +1,6 @@
 import argparse
 import sys
-from  import complementarity, generator, scheduler
+from . import complementarity, generator, scheduler
 from .application import Application
 
 
