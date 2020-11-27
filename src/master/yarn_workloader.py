@@ -1,6 +1,6 @@
 from xml.dom import minidom
 import xml.etree.ElementTree as ET
-from application import Application, FlinkApplication
+from .application import Application, FlinkApplication
 
 
 class Jobs:

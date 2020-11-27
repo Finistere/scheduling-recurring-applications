@@ -1,9 +1,7 @@
 import argparse
 import sys
-import generator
-import scheduler
-import complementarity
-from application import Application
+from  import complementarity, generator, scheduler
+from .application import Application
 
 
 def run(args):

@@ -1,4 +1,4 @@
-from repeated_timer import *
+from master.repeated_timer import *
 import time
 
 

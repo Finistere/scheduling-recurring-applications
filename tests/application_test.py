@@ -1,6 +1,6 @@
-from application import *
-from resource_manager import DummyRM
-from cluster import Node
+from master.application import *
+from master.resource_manager import DummyRM
+from master.cluster import Node
 import time
 import pytest
 

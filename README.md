@@ -1,5 +1,20 @@
 # Interference-aware scheduler
 
+Installation
+
+```
+python3 -m venv <X>
+source <X>/bin/activate
+pip install -e .
+```
+
+Tests
+
+```
+pip install pytest
+pytest
+```
+
 Example command:
 
 ```

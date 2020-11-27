@@ -1,15 +1,19 @@
-import generator
-from resource_manager import DummyRM
-from stat_collector import DummyStatCollector, Server
-from yarn_workloader import Experiment
-from scheduler import RoundRobin
-from complementarity import EpsilonGreedy
+from master import generator
+from master.resource_manager import DummyRM
+from master.stat_collector import DummyStatCollector, Server
+from master.yarn_workloader import Experiment
+from master.scheduler import RoundRobin
+from master.complementarity import EpsilonGreedy
+import os.path
+from pathlib import Path
+
+DUMMIES_DIR = Path(os.path.dirname(os.path.realpath(__file__))) / 'dummies'
 
 
 class TestGenerators:
 
     def test_cluster(self):
-        with open('test/dummies/config.yaml') as config:
+        with open(DUMMIES_DIR / 'config.yaml') as config:
             cluster = generator.cluster(config)
         rm = cluster.resource_manager
 
@@ -34,15 +38,15 @@ class TestGenerators:
         assert Server.net_interface == "net"
 
     def test_experiment(self):
-        with open('test/dummies/jobs.xml') as jobs_xml:
+        with open(DUMMIES_DIR / 'jobs.xml') as jobs_xml:
             exp = generator.experiment(jobs_xml.read(), 4)
 
         assert len(exp.applications) == 4
 
     def test_scheduler(self):
-        with open('test/dummies/config.yaml') as config, \
-                open('test/dummies/jobs.xml') as jobs_file, \
-                open('test/dummies/experiment.xml') as exp_file:
+        with open(DUMMIES_DIR / 'config.yaml') as config, \
+                open(DUMMIES_DIR / 'jobs.xml') as jobs_file, \
+                open(DUMMIES_DIR / 'experiment.xml') as exp_file:
             scheduler = generator.scheduler(
                 scheduler_class=RoundRobin,
                 estimation_class=EpsilonGreedy,

@@ -2,7 +2,7 @@ import subprocess
 import time
 from typing import List
 from threading import Thread
-from resource_manager import ResourceManager
+from .resource_manager import ResourceManager
 from abc import ABCMeta, abstractmethod
 import uuid
 

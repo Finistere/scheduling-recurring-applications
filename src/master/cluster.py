@@ -1,6 +1,6 @@
-from stat_collector import StatCollector, Server, Usage
-from resource_manager import ResourceManager
-from application import Application, Container
+from .stat_collector import StatCollector, Server, Usage
+from .resource_manager import ResourceManager
+from .application import Application, Container
 from typing import List, Tuple
 from tabulate import tabulate
 import operator

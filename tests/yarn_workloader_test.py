@@ -1,5 +1,9 @@
-from yarn_workloader import *
+from master.yarn_workloader import *
 import xml.etree.ElementTree as ET
+import os.path
+from pathlib import Path
+
+DUMMIES_DIR = Path(os.path.dirname(os.path.realpath(__file__))) / 'dummies'
 
 
 class Xml2Application:
@@ -18,7 +22,7 @@ class Xml2Application:
     )
 
     def test_xml_to_flink_application(self):
-        with open('test/dummies/jobs.xml') as xml_file:
+        with open(DUMMIES_DIR / 'jobs.xml') as xml_file:
             xml = ET.parse(xml_file).getroot('jobs').find('job')
             flink_app = xml_to_flink_application(xml)
 
@@ -37,7 +41,7 @@ class TestJobs:
     }
 
     def test_read(self):
-        with open('test/dummies/jobs.xml') as xml:
+        with open(DUMMIES_DIR / 'jobs.xml') as xml:
             jobs = Jobs(xml)
 
         for name, app in jobs._data.items():
@@ -46,7 +50,7 @@ class TestJobs:
 
 class TestExperiment:
     def test_read(self):
-        with open('test/dummies/jobs.xml') as jobs_xml, open('test/dummies/experiment.xml') as exp_xml:
+        with open(DUMMIES_DIR / 'jobs.xml') as jobs_xml, open(DUMMIES_DIR / 'experiment.xml') as exp_xml:
             exp = Experiment(exp_xml, jobs_xml=jobs_xml)
 
         assert exp.name == "tpch-coco"
@@ -67,7 +71,7 @@ class TestExperiment:
                 TestJobs.expected_apps['tpch-1-full'].copy(),
             ]
         )
-        with open('test/dummies/experiment.xml') as exp_file:
+        with open(DUMMIES_DIR / 'experiment.xml') as exp_file:
             expected_xml = exp_file.read()
 
         assert expected_xml == exp.to_xml().strip()

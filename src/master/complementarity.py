@@ -2,10 +2,9 @@ import numpy as np
 from abc import ABCMeta, abstractmethod
 import operator
 from typing import Dict, List
-from application import Application
+from .application import Application
 import os
 import errno
-from pprint import pprint
 from tabulate import tabulate
 
 

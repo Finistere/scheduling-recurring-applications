@@ -1,8 +1,8 @@
 import pytest
-from cluster import *
-from application import DummyApplication
-from resource_manager import DummyRM
-from stat_collector import DummyStatCollector
+from master.cluster import *
+from master.application import DummyApplication
+from master.resource_manager import DummyRM
+from master.stat_collector import DummyStatCollector
 
 
 class TestNode:

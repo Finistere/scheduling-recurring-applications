@@ -1,9 +1,9 @@
 from abc import ABCMeta, abstractmethod
-from sklearn.cross_validation import LeaveOneOut
-from cluster import Cluster, Node
-from application import Application
-from complementarity import ComplementarityEstimation
-from repeated_timer import RepeatedTimer
+from sklearn.model_selection import LeaveOneOut
+from .cluster import Cluster, Node
+from .application import Application
+from .complementarity import ComplementarityEstimation
+from .repeated_timer import RepeatedTimer
 from threading import Lock
 from typing import List
 import time
@@ -37,7 +37,7 @@ class Scheduler(metaclass=ABCMeta):
     def update_estimation(self):
         for (apps, usage) in self.cluster.apps_usage():
             if len(apps) > 0 and usage.is_not_idle():
-                for rest, out in LeaveOneOut(len(apps)):
+                for rest, out in LeaveOneOut().split(range(len(apps))):
                     self.estimation.update_app(apps[out[0]], [apps[i] for i in rest], usage.rate())
         if self.print_estimation:
             self.estimation.print()

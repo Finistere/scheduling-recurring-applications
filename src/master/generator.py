@@ -1,15 +1,13 @@
 import yaml
-import stat_collector
-import resource_manager
-from cluster import Cluster
+from .cluster import Cluster
 import numpy as np
-from yarn_workloader import Jobs, Experiment
-import complementarity
-from scheduler import EstimationBenchmark
+from .yarn_workloader import Jobs, Experiment
+from . import complementarity, resource_manager, stat_collector
+from .scheduler import EstimationBenchmark
 
 
 def cluster(yaml_source):
-    config = yaml.load(yaml_source)
+    config = yaml.load(yaml_source, Loader=yaml.FullLoader)
     rm = getattr(resource_manager, config['resource_manager']['type'])(
         **config['resource_manager'].get('kwargs', {})
     )

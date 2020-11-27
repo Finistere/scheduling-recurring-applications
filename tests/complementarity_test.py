@@ -1,5 +1,5 @@
-from complementarity import *
-from application import DummyApplication
+from master.complementarity import *
+from master.application import DummyApplication
 import numpy as np
 
 jobs = np.array([
